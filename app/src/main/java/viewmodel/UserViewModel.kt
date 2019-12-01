@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.beheer.R
 import data.local.Dao.BeheerDatabase
 import data.model.User
+import data.model.UserWrapper
 import data.remote.ServiceBuilder
 import data.remote.WebService.UserService
 import kotlinx.coroutines.launch
@@ -31,8 +32,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     val getResponse: LiveData<Response<User>>
         get() = _getResponse
 
-    private val _getResponses = MutableLiveData<Response<UsersWrapper>>()
-    val getResponses: LiveData<Response<UsersWrapper>>
+    private val _getResponses = MutableLiveData<Response<UserWrapper>>()
+    val getResponses: LiveData<Response<UserWrapper>>
         get() = _getResponses
 
     private val _updateResponse = MutableLiveData<Response<User>>()

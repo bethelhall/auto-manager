@@ -1,5 +1,6 @@
 package data.remote.WebService
 import data.model.User
+import data.model.UserWrapper
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -8,7 +9,7 @@ import retrofit2.http.*
 interface UserService {
 
     @GET("users")
-    fun getUsersAsync(): Deferred<Response<UsersWrapper>>
+    fun getUsersAsync(): Deferred<Response<UserWrapper>>
 
     @GET("users/{id}")
     fun getUserAsync(@Path("id") id: Long): Deferred<Response<User>>
