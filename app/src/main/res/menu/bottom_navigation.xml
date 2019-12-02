@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/bottom_posted"
+        android:title="Cars"
+        android:icon="@drawable/ic_local_post_office_black_24dp"
+        />
+    <item android:id="@+id/bottom_bids"
+        android:title="Recently Added"
+        android:icon="@drawable/ic_bookmark_black_24dp"
+        />
+    <item android:id="@+id/bottom_manage"
+        android:title="Manage"
+        android:icon="@drawable/ic_settings_black_24dp"
+        />
+</menu>

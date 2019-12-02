@@ -57,9 +57,4 @@ class UserRepository(private val userService: UserService, private val userDao: 
             userService.updateUserAsync(id, user).await()
         }
 
-//    suspend fun deleteUser(id: Long): Response<Void> =
-//        withContext(Dispatchers.IO) {
-//            deleteUserFromLocal(id)
-//            userService.deleteUserAsync(id).await()
-//        }
 }

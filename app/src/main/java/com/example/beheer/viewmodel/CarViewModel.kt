@@ -1,4 +1,4 @@
-package viewmodel
+package com.example.beheer.viewmodel
 
 import android.app.Application
 import android.widget.Toast
@@ -24,50 +24,20 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
         carRepository = CarRepository(carService, carDao)
     }
 
-    val carmodel = MutableLiveData<String>()
-    val price = MutableLiveData<Long>()
-    val color = MutableLiveData<Long>()
-    val engine = MutableLiveData<String>()
-    val yr = MutableLiveData<String>()
-    val km = MutableLiveData<String>()
 
     fun onPostButtonClicked() {
-
-        insetCar(
-            Car(
-                0,
-                carmodel.toString().toLong(),
-                price.toString(),
-                engine.toString(),
-                yr.toString().toLong(),
-                km.toString().toLong(),
-                color.toString()
-
-            )
-        )
 
         Toast.makeText(getApplication(), "Post added", Toast.LENGTH_LONG).show()
 
     }
 
     fun onEditButtonClicked() {
-        updateCar(
-            0,
-            Car(
-                0,
-                carmodel.toString().toLong(),
-                price.toString(),
-                engine.toString(),
-                yr.toString().toLong(),
-                km.toString().toLong(),
-                color.toString()
 
-            )
-        )
     }
     fun onDeleteButtonClicked() {
         deleteCar(0)
     }
+
     private val _getResponse = MutableLiveData<Response<Car>>()
     val getResponse: LiveData<Response<Car>>
         get() = _getResponse
@@ -93,15 +63,15 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
         get() = _getLocalResponse
 
 
-    fun getItems() = viewModelScope.launch {
-        _getResponses.postValue(carRepository.getItems())
+    fun getCars() = viewModelScope.launch {
+        _getResponses.postValue(carRepository.getCars())
     }
 
-    fun getItemById(id: Long) = viewModelScope.launch {
-        _getResponse.postValue(carRepository.getItemById(id))
+    fun getCarById(id: Long) = viewModelScope.launch {
+        _getResponse.postValue(carRepository.getCarById(id))
     }
 
-    fun getItemsByUserId(userId: Long) = viewModelScope.launch {
+    fun getCarsByUserId(userId: Long) = viewModelScope.launch {
         _getResponses.postValue(carRepository.getCarsByUserId(userId))
     }
 
@@ -109,17 +79,17 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
         _insertResponse.postValue(carRepository.insertCar(car))
     }
 
-    fun updateItem(id: Long, car: Car) = viewModelScope.launch {
-        _updateResponse.postValue(carRepository.updateItem(id, item))
+    fun updateCar(id: Long, car: Car) = viewModelScope.launch {
+        _updateResponse.postValue(carRepository.updateCaProfile(id, car))
     }
 
-    fun deleteItem(id: Long) = viewModelScope.launch {
-        _deleteResponse.postValue(carRepository.deleteItem(id))
+    fun deleteCar(id: Long) = viewModelScope.launch {
+        _deleteResponse.postValue(carRepository.deleteCar(id))
     }
 
-    fun getItemsFromLocal() =
+    fun getCarsFromLocal() =
         viewModelScope.launch {
-            _getLocalResponse.postValue(itemRepository.getItemsFromLocal().value)
+            _getLocalResponse.postValue(carRepository.getCarsFromLocal().value)
         }
 
 

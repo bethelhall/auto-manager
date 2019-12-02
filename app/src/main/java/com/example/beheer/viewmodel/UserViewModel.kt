@@ -1,7 +1,6 @@
-package com.example.chareta.viewmodel
+package com.example.beheer.viewmodel
 
 import android.app.Application
-import android.app.*;
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,6 +16,7 @@ import repository.UserRepository
 import retrofit2.Response
 import view.LoginFragment
 import view.RegistrationFragment
+
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -65,25 +65,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         _updateResponse.postValue(userRepository.updateUser(id, user))
     }
 
-    fun deleteUser(id: Long) = viewModelScope.launch {
-        _deleteResponse.postValue(userRepository.deleteUser(id))
-    }
 
-
-    val username = MutableLiveData<String>()
-
-    val password = MutableLiveData<String>()
-    val userUsername = MutableLiveData<String>()
-
-    val userPassword = MutableLiveData<String>()
-
-
-    val userPhoneno = MutableLiveData<String>()
-    val userAddress = MutableLiveData<String>()
-
-    val userConfirmPassword = MutableLiveData<String>()
-
-    val registerConfirmation = MutableLiveData<String>()
 
     fun cancelButtonClicked() {
 

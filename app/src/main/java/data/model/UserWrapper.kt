@@ -9,7 +9,7 @@ data class UserWrapper (
 ) {
 
     data class UserList(
-        @SerializedName("cars")
+        @SerializedName("users")
         @Expose
         val allUsers: List<User>
     )
