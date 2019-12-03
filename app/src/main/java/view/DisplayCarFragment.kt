@@ -1,5 +1,6 @@
-package com.example.chareta.view
+package view
 
+import adapter.ManageRecyclerAdapter
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -8,15 +9,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.beheer.MainActivity
+import com.example.beheer.*
+import com.example.beheer.NavigationHost
+
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
-
+import com.example.chareta.MainActivity
+import kotlinx.android.synthetic.main.fragment_display_car.view.*
 
 
 class DisplayCarFragment : Fragment() {
     private lateinit var carViewModel: CarViewModel
     private lateinit var recyclerView: RecyclerView
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,29 +36,28 @@ class DisplayCarFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.your_posts_fragment, container, false)
+        val view = inflater.inflate(R.layout.fragment_display_car, container, false)
         val viewModel = ViewModelProviders.of(this).get(CarViewModel::class.java)
         val activity = activity as MainActivity?
         activity?.hideBottomBar(false)
         (activity as AppCompatActivity).setSupportActionBar(view.app_bar)
 
         val isConnected = activity.connected()
-
         recyclerView = view.recycler_view_manage
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
 
         if (isConnected) {
-            itemViewModel.getItemsByUserId(1)
-            itemViewModel.getResponses.observe(this, Observer {
+            carViewModel.getCarsByUserId(1)
+            carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
                 recyclerView.adapter =
-                    ManageRecyclerAdapter(it.body()!!, itemViewModel)
+                    ManageRecyclerAdapter(it.body()!!, carViewModel)
             })
         } else {
-            itemViewModel.getItemsFromLocal()
-            itemViewModel.getResponses.observe(this, Observer {
+            carViewModel.getCarsFromLocal()
+            carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
                 recyclerView.adapter =
-                    ManageRecyclerAdapter(it.body()!!, itemViewModel)
+                    ManageRecyclerAdapter(it.body()!!, carViewModel)
             })
         }
         return view
@@ -67,7 +72,7 @@ class DisplayCarFragment : Fragment() {
         when (item.itemId) {
 
             R.id.post_item -> (activity as NavigationHost).navigateTo(
-                CreatePostFragment(),
+                DisplayCarFragment(),
                 true
             ) // Navigate to the next Fragment
             R.id.logout -> (activity as NavigationHost).navigateTo(LoginFragment(), false)

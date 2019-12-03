@@ -1,70 +1,63 @@
 package view
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import android.widget.EditText
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.beheer.NavigationHost
 import com.example.beheer.R
-
+import com.example.chareta.MainActivity
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.android.synthetic.main.fragment_registration.view.*
 
 
 class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
+    //firebase Authentication
+    private lateinit var firebaseAuth: FirebaseAuth
+    //text fields
+    private lateinit var emailEditText: EditText
+    private lateinit var passwordEditText: EditText
 
-        }
-    }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        listener?.onFragmentInteraction(uri)
-    }
+        emailEditText = view.email_input
+        passwordEditText = view.password_input
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is OnFragmentInteractionListener) {
-            listener = context
-        } else {
-            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
-        }
-    }
+        firebaseAuth = FirebaseAuth.getInstance()
 
-    override fun onDetach() {
-        super.onDetach()
-        listener = null
-    }
+        val activity = activity as MainActivity?
+        activity?.hideBottomBar(true)
 
-    interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        fun onFragmentInteraction(uri: Uri)
-    }
 
-    companion object {
 
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-
+        view.login_button.setOnClickListener {
+            firebaseAuth.signInWithEmailAndPassword(emailEditText.toString(), passwordEditText.toString()).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    //            Navigation.createNavigateOnClickListener(R.id.postedItemFragment)
+                    (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
+                } else {
+                    Toast.makeText(activity?.applicationContext, "Error, please try again!", Toast.LENGTH_LONG).show()
                 }
             }
+
+        }
+        //navigate to register fragment
+        view.register_button.setOnClickListener {
+            //Navigation.createNavigateOnClickListener(R.id.registerFragment)
+            (activity as NavigationHost).navigateTo(RegisterFragment(), true)
+        }
+        return view
+
     }
 }

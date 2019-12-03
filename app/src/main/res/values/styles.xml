@@ -1,6 +1,6 @@
 <resources>
     <style name="AppTheme" parent="Theme.Beheer">
-        <item name="colorPrimary">#FD9725</item>
+        <item name="colorPrimary">#FF5722</item>
         <item name="colorPrimaryDark">#FFCF44</item>
         <item name="colorAccent">#FD9725</item>
         <item name="colorOnPrimary">#FFFFFF</item>

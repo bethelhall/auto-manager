@@ -27,9 +27,9 @@ class ManageRecyclerAdapter(private var allCars: CarWrapper, private var carView
     override fun onBindViewHolder(holder: ManageViewHolder, position: Int) {
         val car = allCars.embeddedItems.allCar[position]
         val carId = allCars.embeddedItems.allCar[position].id
-        holder.itemName.text = item.item_name
-        holder.startingPrice.text = item.starting_price.toString()
-        holder.expiryDate.text = item.expiry_date
+//        holder.itemName.text = item.item_name
+//        holder.startingPrice.text = item.starting_price.toString()
+//        holder.expiryDate.text = item.expiry_date
 
         holder.deleteButton.setOnClickListener {
             carViewModel.deleteCar(carId)

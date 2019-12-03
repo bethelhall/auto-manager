@@ -15,7 +15,8 @@ import kotlinx.coroutines.launch
 import repository.UserRepository
 import retrofit2.Response
 import view.LoginFragment
-import view.RegistrationFragment
+import view.RegisterFragment
+
 
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
@@ -80,7 +81,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun notRegisteredClicked() {
-        val registerFragment = RegistrationFragment()
+        val registerFragment = RegisterFragment()
         registerFragment.requireFragmentManager()
             .beginTransaction()
             .replace(R.id.container, registerFragment)
