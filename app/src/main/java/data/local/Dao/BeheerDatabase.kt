@@ -32,7 +32,7 @@ abstract class BeheerDatabase : RoomDatabase() {
 
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    BeheerDatabase::class.java, "beheer_database"
+                    BeheerDatabase::class.java, "beheer"
                 ).build()
 
                 INSTANCE = instance

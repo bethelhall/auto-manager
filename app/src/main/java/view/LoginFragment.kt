@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.beheer.NavigationHost
 import com.example.beheer.R
-import com.example.chareta.MainActivity
+import com.example.beheer.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
@@ -40,14 +40,20 @@ class LoginFragment : Fragment() {
         activity?.hideBottomBar(true)
 
 
-
         view.login_button.setOnClickListener {
-            firebaseAuth.signInWithEmailAndPassword(emailEditText.toString(), passwordEditText.toString()).addOnCompleteListener {
+            firebaseAuth.signInWithEmailAndPassword(
+                emailEditText.toString(),
+                passwordEditText.toString()
+            ).addOnCompleteListener {
                 if (it.isSuccessful) {
                     //            Navigation.createNavigateOnClickListener(R.id.postedItemFragment)
                     (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
                 } else {
-                    Toast.makeText(activity?.applicationContext, "Error, please try again!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        activity?.applicationContext,
+                        "Error, please try again!",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 

@@ -6,15 +6,14 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.beheer.*
+import com.example.beheer.MainActivity
 import com.example.beheer.NavigationHost
-
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
-import com.example.chareta.MainActivity
 import kotlinx.android.synthetic.main.fragment_display_car.view.*
 
 
@@ -28,7 +27,7 @@ class DisplayCarFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        carViewModel = ViewModelProviders.of(this).get(CarViewModel::class.java)
+        carViewModel = ViewModelProvider(this).get(CarViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -37,12 +36,11 @@ class DisplayCarFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_display_car, container, false)
-        val viewModel = ViewModelProviders.of(this).get(CarViewModel::class.java)
         val activity = activity as MainActivity?
-        activity?.hideBottomBar(false)
+
         (activity as AppCompatActivity).setSupportActionBar(view.app_bar)
 
-        val isConnected = activity.connected()
+        val isConnected = true
         recyclerView = view.recycler_view_manage
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
