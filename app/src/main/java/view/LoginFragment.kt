@@ -8,12 +8,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.beheer.NavigationHost
-import com.example.beheer.R
 import com.example.beheer.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import kotlinx.android.synthetic.main.fragment_registration.view.*
-
+import androidx.annotation.Nullable
 
 class LoginFragment : Fragment() {
 
@@ -24,12 +22,17 @@ class LoginFragment : Fragment() {
     private lateinit var passwordEditText: EditText
 
 
+    override fun onCreate(@Nullable savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        firebaseAuth = FirebaseAuth.getInstance()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        val view = inflater.inflate(com.example.beheer.R.layout.fragment_login, container, false)
 
         emailEditText = view.email_input
         passwordEditText = view.password_input
@@ -46,7 +49,6 @@ class LoginFragment : Fragment() {
                 passwordEditText.toString()
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    //            Navigation.createNavigateOnClickListener(R.id.postedItemFragment)
                     (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
                 } else {
                     Toast.makeText(
@@ -56,11 +58,8 @@ class LoginFragment : Fragment() {
                     ).show()
                 }
             }
-
         }
-        //navigate to register fragment
         view.register_button.setOnClickListener {
-            //Navigation.createNavigateOnClickListener(R.id.registerFragment)
             (activity as NavigationHost).navigateTo(RegisterFragment(), true)
         }
         return view

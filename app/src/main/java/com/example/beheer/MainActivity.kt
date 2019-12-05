@@ -5,14 +5,11 @@ import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
-
 import kotlinx.android.synthetic.main.activity_main.*
 import view.LoginFragment
 import view.RegisterFragment
 
 class MainActivity : AppCompatActivity(){
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,13 +18,12 @@ class MainActivity : AppCompatActivity(){
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, RegisterFragment())
+                .replace(R.id.container, LoginFragment())
                 .commit()
         }
         hideBottomBar(false)
 
     }
-
 
     fun hideBottomBar(isHidden: Boolean) {
         bottom_navigation.visibility = if (isHidden) View.GONE else View.VISIBLE

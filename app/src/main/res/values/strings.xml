@@ -34,5 +34,11 @@
     <string name="item_descritption">Item description</string>
     <string name="place_bid">Place a Bid</string>
     <string name="placebid">Place Bid</string>
+    <string name="register">Register</string>
+    <string name="cancel">Cancel</string>
+    <string name="login">Login</string>
+    <string name="edit_password">Edit Password</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 
 </resources>
