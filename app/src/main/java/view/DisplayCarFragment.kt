@@ -1,12 +1,13 @@
 package view
 
-import adapter.ManageRecyclerAdapter
+import adapter.CarRecyclerAdapter
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +27,6 @@ class DisplayCarFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
         carViewModel = ViewModelProvider(this).get(CarViewModel::class.java)
     }
 
@@ -46,16 +46,16 @@ class DisplayCarFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
 
         if (isConnected) {
-            carViewModel.getCarsByUserId(1)
+            carViewModel.getCars()
             carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
                 recyclerView.adapter =
-                    ManageRecyclerAdapter(it.body()!!, carViewModel)
+                    CarRecyclerAdapter(it.body()!!, carViewModel)
             })
         } else {
             carViewModel.getCarsFromLocal()
             carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
                 recyclerView.adapter =
-                    ManageRecyclerAdapter(it.body()!!, carViewModel)
+                    CarRecyclerAdapter(it.body()!!, carViewModel)
             })
         }
         return view

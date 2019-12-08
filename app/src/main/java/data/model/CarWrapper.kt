@@ -6,13 +6,12 @@ import com.google.gson.annotations.SerializedName
 data class CarWrapper(
     @SerializedName("_embedded")
     @Expose
-    val embeddedItems: CarList
+    val embeddedCars: CarList
 ) {
-
     data class CarList(
         @SerializedName("cars")
         @Expose
-        val allCar: List<Car>
+        val allCars: List<Car>
     )
 
 }

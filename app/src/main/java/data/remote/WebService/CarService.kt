@@ -9,7 +9,7 @@ import retrofit2.http.*
 interface  CarService {
 
     @GET("cars")
-    fun getItemsAsync(): Deferred<Response<CarWrapper>>
+    fun getCarsAsync(): Deferred<Response<CarWrapper>>
 
     @GET("cars/{id}")
     fun getCarAsync(@Path("id") id: Long): Deferred<Response<Car>>

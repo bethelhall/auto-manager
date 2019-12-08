@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.beheer.NavigationHost
 import com.example.beheer.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import androidx.annotation.Nullable
+import com.example.beheer.NavigationHost
 
 class LoginFragment : Fragment() {
+
 
     //firebase Authentication
     private lateinit var firebaseAuth: FirebaseAuth
@@ -25,6 +26,7 @@ class LoginFragment : Fragment() {
     override fun onCreate(@Nullable savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance()
+
     }
 
     override fun onCreateView(
@@ -33,34 +35,34 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(com.example.beheer.R.layout.fragment_login, container, false)
-
         emailEditText = view.email_input
         passwordEditText = view.password_input
-
         firebaseAuth = FirebaseAuth.getInstance()
+
+        val email = emailEditText.text.toString()
+        val password = passwordEditText.text.toString()
 
         val activity = activity as MainActivity?
         activity?.hideBottomBar(true)
 
-
         view.login_button.setOnClickListener {
             firebaseAuth.signInWithEmailAndPassword(
-                emailEditText.toString(),
-                passwordEditText.toString()
+                "bethel@gmail.com", "1234567"
             ).addOnCompleteListener {
                 if (it.isSuccessful) {
                     (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
                 } else {
                     Toast.makeText(
                         activity?.applicationContext,
-                        "Error, please try again!",
+                        "Login error, please try again!",
                         Toast.LENGTH_LONG
                     ).show()
                 }
             }
         }
         view.register_button.setOnClickListener {
-            (activity as NavigationHost).navigateTo(RegisterFragment(), true)
+
+            (activity as NavigationHost).navigateTo(RegisterFragment(), false)
         }
         return view
 

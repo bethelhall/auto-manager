@@ -7,9 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.beheer.MainActivity">
 
-    <com.rey.material.widget.FrameLayout
+    <fragment
         android:id="@+id/my_nav_host_fragment"
         android:layout_width="0dp"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_height="0dp"
         android:layout_weight="1"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"

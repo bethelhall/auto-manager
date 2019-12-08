@@ -5,11 +5,12 @@ import android.net.NetworkInfo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 import view.LoginFragment
 import view.RegisterFragment
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), NavigationHost{
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,18 +30,18 @@ class MainActivity : AppCompatActivity(){
         bottom_navigation.visibility = if (isHidden) View.GONE else View.VISIBLE
     }
 
-//    override fun navigateTo(fragment: Fragment, addToBackstack: Boolean) {
-//
-//        val transaction = supportFragmentManager
-//            .beginTransaction()
-//            .replace(R.id.container, fragment)
-//
-//        if (addToBackstack) {
-//            transaction.addToBackStack(null)
-//        }
-//
-//        transaction.commit()
-//    }
+    override fun navigateTo(fragment: Fragment, addToBackstack: Boolean) {
+
+        val transaction = supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment)
+
+        if (addToBackstack) {
+            transaction.addToBackStack(null)
+        }
+
+        transaction.commit()
+    }
 
     fun connected(): Boolean {
 

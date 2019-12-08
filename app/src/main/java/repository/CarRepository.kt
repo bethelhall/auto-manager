@@ -1,6 +1,5 @@
 package repository
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import data.local.Dao.CarDao
 import data.model.Car
@@ -31,16 +30,16 @@ class CarRepository(private val carService: CarService, private val carDao: CarD
     private fun deleteCarFromLocal(carId: Long) {
         carDao.deleteCarById(carId)
     }
-
     suspend fun getCars(): Response<CarWrapper> {
         lateinit var cars: Response<CarWrapper>
         withContext(Dispatchers.IO) {
-            val allCars = carService.getItemsAsync().await()
-            saveCarsToLocal(allCars.body()!!.embeddedItems.allCar)  //saving item to a local database
+            val allCars = carService.getCarsAsync().await()
+            saveCarsToLocal(allCars.body()!!.embeddedCars.allCars)  //saving item to a local database
             withContext(Dispatchers.Main) {
                 cars = allCars
             }
         }
+
         return cars
     }
 
