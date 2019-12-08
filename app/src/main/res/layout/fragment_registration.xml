@@ -7,25 +7,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/whiteColor"
-        tools:context="view.RegisterFragment">
+        tools:context="view.RegisterCarFragment">
 
-        <TextView
-            android:id="@+id/place_bid_text_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:text="Register"
-            android:textAllCaps="true"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/guideline9"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/guideline5"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <ImageView-->
+<!--            android:id="@+id/logo"-->
+<!--            android:layout_width="298dp"-->
+<!--            android:layout_height="86dp"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:gravity="center"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:srcCompat="@drawable/logo2"-->
+<!--            tools:layout_editor_absoluteX="72dp"-->
+<!--            tools:ignore="MissingConstraints" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout5"
@@ -33,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="Name"
@@ -55,6 +48,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
@@ -77,6 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="Phone"
@@ -99,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="Password"
@@ -120,7 +116,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:hint="Confirm Password"
@@ -193,7 +189,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="447dp" />
+            app:layout_constraintGuide_begin="473dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

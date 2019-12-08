@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/whiteColor"
-        tools:context=".view.CreatePostFragment">
+        android:background="@color/cardview_light_background">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -24,7 +24,6 @@
                 app:titleTextColor="@android:color/white" />
         </com.google.android.material.appbar.AppBarLayout>
 
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="0dp"
@@ -37,7 +36,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="@string/post_item"
+            android:text="@string/post_car"
             android:textAllCaps="true"
             android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/textInputLayout2"
@@ -55,17 +54,18 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:hint="@string/item_name"
+            android:hint="@string/car_name"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/itemname_editext"
+                android:id="@+id/model_editext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -83,13 +83,13 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/startingprice_Edittext"
+                android:id="@+id/price_Edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1" />
+                android:inputType="number"
+                android:maxLines="1"
+                />
         </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout4"
@@ -100,44 +100,37 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:hint="@string/item_description"
+            android:hint="Engine Type"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/item_description_edit_text"
+                android:id="@+id/engine_type_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout5"
-            android:layout_width="0dp"
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pickdate_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:hint="@string/color"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            android:layout_marginBottom="8dp"
+            android:text="@string/pick_date"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/color_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:maxLines="1" />
-        </com.google.android.material.textfield.TextInputLayout>
-
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+            app:layout_constraintVertical_bias="0.458" />
 
         <TextView
-            android:id="@+id/expiry_date_textview"
+            android:id="@+id/manufacture_date"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_gravity="center_horizontal"
@@ -149,47 +142,54 @@
             android:paddingTop="9dp"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textSize="20sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/pickdate_btn"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.463" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/pickdate_btn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout5"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/pick_date"
-            app:layout_constraintBottom_toTopOf="@+id/guideline3"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:hint="Mile/hour"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout4">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/distance_coverage_editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/back_btn"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:text="@string/button_back"
-            app:layout_constraintEnd_toStartOf="@+id/post_button"
+            app:layout_constraintEnd_toStartOf="@+id/submit_button"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/post_button"
+            android:id="@+id/submit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/post_btn"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="@+id/guideline3" />
@@ -213,7 +213,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_begin="508dp" />
+            app:layout_constraintGuide_begin="529dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

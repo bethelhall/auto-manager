@@ -10,11 +10,10 @@ class ServiceBuilder {
 
     companion object {
         private val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.5.240.108:8080/")
+            .baseUrl("http://10.5.231.11:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
-
         fun <S> buildService(serviceType: Class<S>): S {
             return retrofit.create(serviceType)
         }

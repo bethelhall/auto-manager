@@ -22,14 +22,11 @@ class DisplayCarFragment : Fragment() {
     private lateinit var carViewModel: CarViewModel
     private lateinit var recyclerView: RecyclerView
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         carViewModel = ViewModelProvider(this).get(CarViewModel::class.java)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,7 +37,11 @@ class DisplayCarFragment : Fragment() {
 
         (activity as AppCompatActivity).setSupportActionBar(view.app_bar)
 
-        val isConnected = true
+
+        val isConnected = activity.connected()
+
+        activity.hideBottomBar(false)
+
         recyclerView = view.recycler_view_manage
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
@@ -70,7 +71,7 @@ class DisplayCarFragment : Fragment() {
         when (item.itemId) {
 
             R.id.post_item -> (activity as NavigationHost).navigateTo(
-                DisplayCarFragment(),
+                RegisterCarFragment(),
                 true
             ) // Navigate to the next Fragment
             R.id.logout -> (activity as NavigationHost).navigateTo(LoginFragment(), false)

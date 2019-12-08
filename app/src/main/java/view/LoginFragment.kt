@@ -35,8 +35,10 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(com.example.beheer.R.layout.fragment_login, container, false)
+
         emailEditText = view.email_input
         passwordEditText = view.password_input
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         val email = emailEditText.text.toString()
@@ -45,26 +47,38 @@ class LoginFragment : Fragment() {
         val activity = activity as MainActivity?
         activity?.hideBottomBar(true)
 
-        view.login_button.setOnClickListener {
-            firebaseAuth.signInWithEmailAndPassword(
-                "bethel@gmail.com", "1234567"
-            ).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
-                } else {
-                    Toast.makeText(
-                        activity?.applicationContext,
-                        "Login error, please try again!",
-                        Toast.LENGTH_LONG
-                    ).show()
+
+        val isConnected = activity?.connected()
+
+        if (isConnected!!) {
+            view.login_button.setOnClickListener {
+                firebaseAuth.signInWithEmailAndPassword(
+                    email, password
+                ).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
+                    } else {
+                        Toast.makeText(
+                            activity?.applicationContext,
+                            "Login error, please try again!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
-        }
-        view.register_button.setOnClickListener {
+            view.register_button.setOnClickListener {
 
-            (activity as NavigationHost).navigateTo(RegisterFragment(), false)
+                (activity as NavigationHost).navigateTo(RegisterFragment(), false)
+            }
+        } else {
+            Toast.makeText(
+                activity?.applicationContext,
+                "Error! Check your Internet Connection",
+                Toast.LENGTH_LONG
+            ).show()
         }
         return view
 
     }
+
 }

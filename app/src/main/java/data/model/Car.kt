@@ -13,17 +13,14 @@ data class Car(
     @SerializedName("price")
     val price: Long,
 
-    @SerializedName("color")
-    val color: String,
-
     @SerializedName("model")
     val model: String,
 
     @SerializedName("yr")
-    val year: Long,
+    val year: String,
 
     @SerializedName("km")
-    val km: Long,
+    val km: String,
 
     @SerializedName("engine")
     val engine: String

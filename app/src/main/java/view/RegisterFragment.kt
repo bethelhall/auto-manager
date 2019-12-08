@@ -1,4 +1,5 @@
 package view
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,6 +29,8 @@ class RegisterFragment : Fragment() {
     private lateinit var confirmPasswordEditText: EditText
     private lateinit var firebaseAuth: FirebaseAuth
     private var isMatch = false
+    private var email = ""
+    private var password = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +49,18 @@ class RegisterFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
         val activity = activity as MainActivity?
         activity?.hideBottomBar(true)
-//        val isConnected = activity?.connected()
-        /////
+
+        val isConnected = activity?.connected()
+
         firstNameEditText = view.register_first_name
         emailEditText = view.register_email
+        email = emailEditText.text.toString()
         passwordEditText = view.register_password
+        password = passwordEditText.text.toString()
         phoneEditText = view.register_phone
         confirmPasswordEditText = view.register_confirm_password
+
+
 
         view.back_button.setOnClickListener {
             (activity as NavigationHost).navigateTo(
@@ -61,39 +69,40 @@ class RegisterFragment : Fragment() {
             )
         }
         view.register_button.setOnClickListener {
-//
-//            if (isConnected!!) {
-                firebaseAuth.createUserWithEmailAndPassword(
-                   "gemme@gmail.com",
-                   "123456789"
-                ).addOnCompleteListener {
-                    if (it.isSuccessful) {
+
+            if (isConnected!!) {
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    firebaseAuth.createUserWithEmailAndPassword(
+                        email, password
+                    ).addOnCompleteListener {
+                        if (it.isSuccessful) {
 //                        userViewModel.insertUser(readFields())
-                        Toast.makeText(
-                            activity?.applicationContext,
-                            "Congratulations,you are registered",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
+                            Toast.makeText(
+                                activity?.applicationContext,
+                                "Congratulations,you are registered",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
 
-                    } else {
-                        Toast.makeText(
-                            activity?.applicationContext,
-                            "Registration failed",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        } else {
+                            Toast.makeText(
+                                activity?.applicationContext,
+                                "Registration failed",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
                     }
-                }
 
-//            } else {
-//                Toast.makeText(
-//                    activity?.applicationContext,
-//                    "Not connected to a network!",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//
-//
-//            }
+                } else {
+                    Toast.makeText(
+                        activity?.applicationContext,
+                        "Not connected to a network!",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+
+                }
+            }
         }
 
         return view

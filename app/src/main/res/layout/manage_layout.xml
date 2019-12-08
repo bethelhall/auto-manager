@@ -8,19 +8,30 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:cardBackgroundColor="?attr/colorPrimaryDark"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
             android:background="#FFFFFF"
-            android:padding="20dp"
+            android:orientation="horizontal"
+            android:padding="10dp">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/black"/>
+        <LinearLayout
+            android:layout_width="250dp"
+            android:paddingLeft="20dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
                 android:id="@+id/car_name_manage"
-                android:layout_width="match_parent"
+                android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
+                android:text="Model"
                 android:textAppearance="?attr/textAppearanceHeadline6" />
 
             <TextView
@@ -28,20 +39,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:textAppearance="?attr/textAppearanceBody1" />
+                android:textAppearance="?attr/textAppearanceBody1"/>
 
             <TextView
                 android:id="@+id/manufacture_date_manage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
+                android:text="Model"
                 android:textAppearance="?attr/textAppearanceBody1" />
+
             <TextView
                 android:id="@+id/engine_manage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="2dp"
-                android:textAppearance="?attr/textAppearanceBody1" />
+
+                android:textAppearance="?attr/textAppearanceBody1"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -52,6 +66,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginRight="30dp"
                     android:layout_alignParentRight="true"
                     android:text="@string/edit_button" />
 
@@ -60,12 +75,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
-                    android:layout_marginRight="12dp"
+                    android:layout_marginRight="20dp"
                     android:layout_toStartOf="@id/edit_button"
                     android:layout_toLeftOf="@id/edit_button"
                     android:text="@string/withdraw_button" />
 
             </RelativeLayout>
+        </LinearLayout>
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
