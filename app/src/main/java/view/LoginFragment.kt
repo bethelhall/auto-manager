@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.example.beheer.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import androidx.annotation.Nullable
 import com.example.beheer.NavigationHost
 
 class LoginFragment : Fragment() {
@@ -23,7 +22,7 @@ class LoginFragment : Fragment() {
     private lateinit var passwordEditText: EditText
 
 
-    override fun onCreate(@Nullable savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -36,13 +35,7 @@ class LoginFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(com.example.beheer.R.layout.fragment_login, container, false)
 
-        emailEditText = view.email_input
-        passwordEditText = view.password_input
-
         firebaseAuth = FirebaseAuth.getInstance()
-
-        val email = emailEditText.text.toString()
-        val password = passwordEditText.text.toString()
 
         val activity = activity as MainActivity?
         activity?.hideBottomBar(true)
@@ -52,23 +45,35 @@ class LoginFragment : Fragment() {
 
         if (isConnected!!) {
             view.login_button.setOnClickListener {
-                firebaseAuth.signInWithEmailAndPassword(
-                    email, password
-                ).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
-                    } else {
-                        Toast.makeText(
-                            activity?.applicationContext,
-                            "Login error, please try again!",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-            }
-            view.register_button.setOnClickListener {
+                emailEditText = view.email_input
+                passwordEditText = view.password_input
 
-                (activity as NavigationHost).navigateTo(RegisterFragment(), false)
+                val email = emailEditText.text.toString()
+                val password = passwordEditText.text.toString()
+
+                if (email.isNotEmpty() && password.isNotEmpty()) {
+                    firebaseAuth.signInWithEmailAndPassword(
+                        email, password
+                    ).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
+                        } else {
+                            Toast.makeText(
+                                activity?.applicationContext,
+                                "Firebase :Login error, please try again!",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                } else {
+
+                    Toast.makeText(
+                        activity?.applicationContext,
+                        "Password and Email must be entered",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
             }
         } else {
             Toast.makeText(
@@ -76,6 +81,11 @@ class LoginFragment : Fragment() {
                 "Error! Check your Internet Connection",
                 Toast.LENGTH_LONG
             ).show()
+        }
+
+        view.register_button.setOnClickListener {
+
+            (activity as NavigationHost).navigateTo(RegisterFragment(), false)
         }
         return view
 

@@ -19,18 +19,14 @@ import kotlinx.android.synthetic.main.fragment_registration.view.*
 
 class RegisterFragment : Fragment() {
     private lateinit var userViewModel: UserViewModel
-
-    private lateinit var firstNameEditText: EditText
-    private lateinit var lastNameEditText: EditText
+    private lateinit var nameEditText: EditText
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
-
     private lateinit var phoneEditText: EditText
     private lateinit var confirmPasswordEditText: EditText
     private lateinit var firebaseAuth: FirebaseAuth
     private var isMatch = false
-    private var email = ""
-    private var password = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,15 +48,9 @@ class RegisterFragment : Fragment() {
 
         val isConnected = activity?.connected()
 
-        firstNameEditText = view.register_first_name
-        emailEditText = view.register_email
-        email = emailEditText.text.toString()
-        passwordEditText = view.register_password
-        password = passwordEditText.text.toString()
+        nameEditText = view.register_first_name
         phoneEditText = view.register_phone
         confirmPasswordEditText = view.register_confirm_password
-
-
 
         view.back_button.setOnClickListener {
             (activity as NavigationHost).navigateTo(
@@ -70,13 +60,19 @@ class RegisterFragment : Fragment() {
         }
         view.register_button.setOnClickListener {
 
+            emailEditText = view.register_email
+            val email = emailEditText.text.toString().trim()
+            passwordEditText = view.register_password
+            val password = passwordEditText.text.toString().trim()
+
             if (isConnected!!) {
                 if (email.isNotEmpty() && password.isNotEmpty()) {
                     firebaseAuth.createUserWithEmailAndPassword(
                         email, password
                     ).addOnCompleteListener {
                         if (it.isSuccessful) {
-//                        userViewModel.insertUser(readFields())
+                            userViewModel.insertUser(readFields())
+                            clearFields()
                             Toast.makeText(
                                 activity?.applicationContext,
                                 "Congratulations,you are registered",
@@ -102,24 +98,30 @@ class RegisterFragment : Fragment() {
 
 
                 }
+            } else {
+                Toast.makeText(
+                    activity?.applicationContext,
+                    "Password and Email Required",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
 
         return view
     }
 
-//    private fun readFields() = User(
-//        0,
-//        firstNameEditText.text.toString(),
-//        emailEditText.text.toString(),
-//        phoneEditText.text.toString(),
-//        passwordEditText.text.toString(),
-//        confirmPasswordEditText.text.toString()
-//
-//    )
+    private fun readFields() = User(
+        0,
+        nameEditText.text.toString(),
+        emailEditText.text.toString(),
+        phoneEditText.text.toString(),
+        passwordEditText.text.toString(),
+        confirmPasswordEditText.text.toString()
+
+    )
 
     private fun clearFields() {
-        firstNameEditText.setText("")
+        nameEditText.setText("")
         emailEditText.setText("")
         phoneEditText.setText("")
         passwordEditText.setText("")

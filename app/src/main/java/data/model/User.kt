@@ -12,12 +12,9 @@ class User(
     @SerializedName("id")
     @PrimaryKey val id: Long,
 
-    @SerializedName("first_name")
+    @SerializedName("name")
     val first_name: String,
 
-
-    @SerializedName("last_name")
-    val last_name: String,
 
     @SerializedName("email")
     val email: String,

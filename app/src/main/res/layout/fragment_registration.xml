@@ -9,16 +9,16 @@
         android:background="@color/whiteColor"
         tools:context="view.RegisterCarFragment">
 
-<!--        <ImageView-->
-<!--            android:id="@+id/logo"-->
-<!--            android:layout_width="298dp"-->
-<!--            android:layout_height="86dp"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:gravity="center"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@drawable/logo2"-->
-<!--            tools:layout_editor_absoluteX="72dp"-->
-<!--            tools:ignore="MissingConstraints" />-->
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="298dp"
+            android:layout_height="86dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/newlogo"
+            tools:layout_editor_absoluteX="72dp"
+            tools:ignore="MissingConstraints" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout5"

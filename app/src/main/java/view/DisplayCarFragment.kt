@@ -16,6 +16,7 @@ import com.example.beheer.NavigationHost
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
 import kotlinx.android.synthetic.main.fragment_display_car.view.*
+import kotlinx.android.synthetic.main.manage_layout.view.*
 
 
 class DisplayCarFragment : Fragment() {
@@ -27,6 +28,7 @@ class DisplayCarFragment : Fragment() {
         setHasOptionsMenu(true)
         carViewModel = ViewModelProvider(this).get(CarViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,28 +39,29 @@ class DisplayCarFragment : Fragment() {
 
         (activity as AppCompatActivity).setSupportActionBar(view.app_bar)
 
-
         val isConnected = activity.connected()
 
         activity.hideBottomBar(false)
 
         recyclerView = view.recycler_view_manage
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
+
 
         if (isConnected) {
             carViewModel.getCars()
             carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
                 recyclerView.adapter =
-                    CarRecyclerAdapter(it.body()!!, carViewModel)
+                    CarRecyclerAdapter(it.body()!!, carViewModel,activity.supportFragmentManager)
             })
         } else {
             carViewModel.getCarsFromLocal()
             carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
                 recyclerView.adapter =
-                    CarRecyclerAdapter(it.body()!!, carViewModel)
+                    CarRecyclerAdapter(it.body()!!, carViewModel,activity.supportFragmentManager
+                        )
             })
         }
+
         return view
     }
 

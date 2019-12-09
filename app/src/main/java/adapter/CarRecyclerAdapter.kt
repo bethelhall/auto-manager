@@ -5,22 +5,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
 import data.model.CarWrapper
+import kotlinx.android.synthetic.main.activity_main.view.*
+import view.CarDetailFragment
+import view.EditCarFragment
 
 
 class CarRecyclerAdapter(
     private var allCars: CarWrapper,
-    private var carViewModel: CarViewModel
-) :
-    RecyclerView.Adapter<CarRecyclerAdapter.ManageViewHolder>() {
+    private var carViewModel: CarViewModel,
+    private var fragment: FragmentManager
+) : RecyclerView.Adapter<CarRecyclerAdapter.ManageViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ManageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val recyclerViewItem = inflater.inflate(R.layout.manage_layout, parent, false)
-        return ManageViewHolder(recyclerViewItem)
+        val recyclerViewCar = inflater.inflate(R.layout.manage_layout, parent, false)
+        return ManageViewHolder(recyclerViewCar)
     }
 
     override fun getItemCount(): Int {
@@ -33,19 +38,33 @@ class CarRecyclerAdapter(
         holder.model.text = car.model
         holder.eng_type.text = car.engine
         holder.price.text = car.price.toString()
-        holder.manuf_date.text = car.year.toString()
+        holder.manuf_date.text = car.year
+
+
 
         holder.deleteButton.setOnClickListener {
             carViewModel.deleteCar(carId)
         }
         holder.editButton.setOnClickListener {
-
-            //move to edit fragment
+            fragment.beginTransaction()
+                .replace(
+                    R.id.container,
+                    EditCarFragment.newInstance(allCars.embeddedCars.allCars[position].id)
+                )
         }
+
+        holder.carView.setOnClickListener {
+            fragment.beginTransaction()
+                .replace(
+                    R.id.container,
+                    CarDetailFragment.newInstance(allCars.embeddedCars.allCars[position].id)
+                )
+        }
+
+
     }
 
-    class ManageViewHolder(carView: View) : RecyclerView.ViewHolder(carView) {
-
+    class ManageViewHolder(var carView: View) : RecyclerView.ViewHolder(carView) {
         var model: TextView = carView.findViewById(R.id.car_name_manage)
         var price: TextView = carView.findViewById(R.id.price_manage)
         var eng_type: TextView = carView.findViewById(R.id.engine_manage)
