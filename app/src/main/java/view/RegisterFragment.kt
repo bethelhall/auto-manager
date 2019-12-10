@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.beheer.MainActivity
@@ -25,6 +27,7 @@ class RegisterFragment : Fragment() {
     private lateinit var phoneEditText: EditText
     private lateinit var confirmPasswordEditText: EditText
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var progressBar: ProgressBar
     private var isMatch = false
 
 
@@ -51,6 +54,7 @@ class RegisterFragment : Fragment() {
         nameEditText = view.register_first_name
         phoneEditText = view.register_phone
         confirmPasswordEditText = view.register_confirm_password
+        progressBar = view.loading_spinner
 
         view.back_button.setOnClickListener {
             (activity as NavigationHost).navigateTo(
@@ -59,6 +63,8 @@ class RegisterFragment : Fragment() {
             )
         }
         view.register_button.setOnClickListener {
+
+            progressBar.isVisible = true
 
             emailEditText = view.register_email
             val email = emailEditText.text.toString().trim()
@@ -72,7 +78,11 @@ class RegisterFragment : Fragment() {
                     ).addOnCompleteListener {
                         if (it.isSuccessful) {
                             userViewModel.insertUser(readFields())
+
                             clearFields()
+
+                            progressBar.isVisible = false
+
                             Toast.makeText(
                                 activity?.applicationContext,
                                 "Congratulations,you are registered",
@@ -81,6 +91,7 @@ class RegisterFragment : Fragment() {
                             (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
 
                         } else {
+                            progressBar.isVisible = false
                             Toast.makeText(
                                 activity?.applicationContext,
                                 "Registration failed",

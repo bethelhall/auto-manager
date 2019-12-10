@@ -10,6 +10,25 @@
         app:cardBackgroundColor="?attr/colorPrimaryDark"
         app:cardCornerRadius="6dp">
 
+        <ProgressBar
+            android:id="@+id/loading_spinner_login"
+            android:layout_width="107dp"
+            android:layout_height="76dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="181dp"
+            android:layout_marginTop="51dp"
+            android:layout_marginEnd="181dp"
+            android:layout_marginBottom="125dp"
+            android:gravity="center"
+            android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+             />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -21,11 +40,15 @@
                 android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/black"/>
+
+
         <LinearLayout
             android:layout_width="250dp"
             android:paddingLeft="20dp"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+
             <TextView
                 android:id="@+id/car_name_manage"
                 android:layout_width="125dp"

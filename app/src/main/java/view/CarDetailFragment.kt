@@ -7,14 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.beheer.MainActivity
 import com.example.beheer.NavigationHost
 
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
 import data.model.Car
 import kotlinx.android.synthetic.main.fragment_car_detail.view.*
+import kotlinx.android.synthetic.main.fragment_car_detail.view.app_bar
+import kotlinx.android.synthetic.main.fragment_display_car.view.*
 
 
 class CarDetailFragment : Fragment() {
@@ -43,6 +47,13 @@ class CarDetailFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_car_detail, container, false)
 
+
+        (activity as AppCompatActivity).setSupportActionBar(view.app_bar)
+
+
+        val activity = activity as MainActivity?
+        activity?.hideBottomBar(false)
+
         model = view.carname_textview
         distance = view.distance
         price = view.distance
@@ -62,6 +73,8 @@ class CarDetailFragment : Fragment() {
             engineType.text = car.engine
 
         })
+
+
 
         backbtn.setOnClickListener {
             (activity as NavigationHost).navigateTo(DisplayCarFragment(), false)

@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Update
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
 import data.model.CarWrapper
@@ -42,8 +43,11 @@ class CarRecyclerAdapter(
 
 
 
+
         holder.deleteButton.setOnClickListener {
+
             carViewModel.deleteCar(carId)
+            notifyDataSetChanged()
         }
         holder.editButton.setOnClickListener {
             fragment.beginTransaction()
@@ -51,6 +55,9 @@ class CarRecyclerAdapter(
                     R.id.container,
                     EditCarFragment.newInstance(allCars.embeddedCars.allCars[position].id)
                 )
+                .addToBackStack(null)
+                .commit()
+
         }
 
         holder.carView.setOnClickListener {
@@ -58,7 +65,10 @@ class CarRecyclerAdapter(
                 .replace(
                     R.id.container,
                     CarDetailFragment.newInstance(allCars.embeddedCars.allCars[position].id)
+
                 )
+                .addToBackStack(null)
+                .commit()
         }
 
 

@@ -25,19 +25,6 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
-    fun onPostButtonClicked() {
-
-        Toast.makeText(getApplication(), "Post added", Toast.LENGTH_LONG).show()
-
-    }
-
-    fun onEditButtonClicked() {
-
-    }
-    fun onDeleteButtonClicked() {
-        deleteCar(0)
-    }
-
     private val _getResponse = MutableLiveData<Response<Car>>()
     val getResponse: LiveData<Response<Car>>
         get() = _getResponse

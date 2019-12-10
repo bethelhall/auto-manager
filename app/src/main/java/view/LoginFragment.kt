@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.beheer.MainActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -17,9 +19,11 @@ class LoginFragment : Fragment() {
 
     //firebase Authentication
     private lateinit var firebaseAuth: FirebaseAuth
-    //text fields
+
     private lateinit var emailEditText: EditText
     private lateinit var passwordEditText: EditText
+
+    private lateinit var progressBar: ProgressBar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,16 +41,22 @@ class LoginFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+
         val activity = activity as MainActivity?
         activity?.hideBottomBar(true)
 
 
-        val isConnected = activity?.connected()
 
-        if (isConnected!!) {
-            view.login_button.setOnClickListener {
+
+        view.login_button.setOnClickListener {
+
+            progressBar = view.loading_spinner_login
+            progressBar.isVisible = true
+
+
                 emailEditText = view.email_input
                 passwordEditText = view.password_input
+
 
                 val email = emailEditText.text.toString()
                 val password = passwordEditText.text.toString()
@@ -56,16 +66,21 @@ class LoginFragment : Fragment() {
                         email, password
                     ).addOnCompleteListener {
                         if (it.isSuccessful) {
+
+                            progressBar.isVisible = false
+
                             (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
                         } else {
                             Toast.makeText(
                                 activity?.applicationContext,
-                                "Firebase :Login error, please try again!",
+                                "Authentication Failed, Please try again!",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
                     }
                 } else {
+
+                    progressBar.isVisible = false
 
                     Toast.makeText(
                         activity?.applicationContext,
@@ -74,13 +89,7 @@ class LoginFragment : Fragment() {
                     ).show()
                 }
 
-            }
-        } else {
-            Toast.makeText(
-                activity?.applicationContext,
-                "Error! Check your Internet Connection",
-                Toast.LENGTH_LONG
-            ).show()
+
         }
 
         view.register_button.setOnClickListener {

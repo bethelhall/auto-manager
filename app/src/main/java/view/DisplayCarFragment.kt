@@ -1,6 +1,7 @@
 package view
 
 import adapter.CarRecyclerAdapter
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -11,14 +12,16 @@ import androidx.lifecycle.ViewModelProviders
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Update
 import com.example.beheer.MainActivity
 import com.example.beheer.NavigationHost
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
+import data.model.CarWrapper
 import kotlinx.android.synthetic.main.fragment_display_car.view.*
 import kotlinx.android.synthetic.main.manage_layout.view.*
 
-
+@Suppress("PLUGIN_WARNING")
 class DisplayCarFragment : Fragment() {
     private lateinit var carViewModel: CarViewModel
     private lateinit var recyclerView: RecyclerView
@@ -44,20 +47,25 @@ class DisplayCarFragment : Fragment() {
         activity.hideBottomBar(false)
 
         recyclerView = view.recycler_view_manage
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         recyclerView.setHasFixedSize(true)
 
 
         if (isConnected) {
+
             carViewModel.getCars()
             carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
-                recyclerView.adapter =
-                    CarRecyclerAdapter(it.body()!!, carViewModel,activity.supportFragmentManager)
+                recyclerView.adapter = CarRecyclerAdapter(it.body()!!, carViewModel, activity.supportFragmentManager)
+
+
             })
         } else {
             carViewModel.getCarsFromLocal()
+
             carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
-                recyclerView.adapter =
-                    CarRecyclerAdapter(it.body()!!, carViewModel,activity.supportFragmentManager
+                recyclerView.adapter = CarRecyclerAdapter(it.body()!!, carViewModel, activity.supportFragmentManager
                         )
             })
         }

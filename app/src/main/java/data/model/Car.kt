@@ -11,18 +11,18 @@ data class Car(
     @PrimaryKey val id: Long,
 
     @SerializedName("price")
-    val price: Long,
+    var price: Long,
 
     @SerializedName("model")
-    val model: String,
+    var model: String,
 
     @SerializedName("yr")
-    val year: String,
+    var year: String,
 
     @SerializedName("km")
-    val km: String,
+    var km: String,
 
     @SerializedName("engine")
-    val engine: String
+    var engine: String
 
 ) : Serializable
