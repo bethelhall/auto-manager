@@ -13,7 +13,6 @@ import android.widget.TextView
 import android.widget.*
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.beheer.MainActivity
@@ -21,7 +20,7 @@ import com.example.beheer.NavigationHost
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
 import data.model.Car
-import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.android.synthetic.main.fragment_register_car.*
 import kotlinx.android.synthetic.main.fragment_register_car.view.*
 
 
@@ -78,12 +77,19 @@ class RegisterCarFragment : Fragment() {
         }
 
         postbtn.setOnClickListener {
+            val car:Car = readFields()
             if (isConnected!!) {
                 carViewModel.insertCar(readFields())
-                clearFields()
-                Toast.makeText(context, "Car Registered", Toast.LENGTH_LONG).show()
+                carViewModel.insertCar(car)
+
+                (activity as NavigationHost).navigateTo(DisplayCarFragment(), true)
+
+                Toast.makeText(context, "Car Registered Successfully!!", Toast.LENGTH_LONG)
+                    .show()
             }
+            clearFields()
         }
+
 
         postdate_btn.setOnClickListener {
 
@@ -103,6 +109,16 @@ class RegisterCarFragment : Fragment() {
         return view
     }
 
+    private fun updateFields(car: Car) {
+        car.run {
+            model_editext.setText(car.model)
+            price_Edittext.setText(car.price.toString())
+            manufacture_date.setText(car.yr)
+            engine_type_editText.setText(car.engine)
+            distance_coverage_editText.setText(car.km)
+        }
+    }
+
     private fun readFields() = Car(
         0,
         price.text.toString().toLong(),
@@ -111,6 +127,7 @@ class RegisterCarFragment : Fragment() {
         distance.text.toString(),
         engineType.text.toString()
     )
+
     private fun clearFields() {
         model.setText("")
         price.setText("")

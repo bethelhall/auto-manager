@@ -76,6 +76,7 @@ class LoginFragment : Fragment() {
                                 "Authentication Failed, Please try again!",
                                 Toast.LENGTH_LONG
                             ).show()
+                            progressBar.isVisible = false
                         }
                     }
                 } else {

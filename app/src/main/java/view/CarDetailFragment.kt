@@ -18,7 +18,6 @@ import com.example.beheer.viewmodel.CarViewModel
 import data.model.Car
 import kotlinx.android.synthetic.main.fragment_car_detail.view.*
 import kotlinx.android.synthetic.main.fragment_car_detail.view.app_bar
-import kotlinx.android.synthetic.main.fragment_display_car.view.*
 
 
 class CarDetailFragment : Fragment() {
@@ -69,7 +68,7 @@ class CarDetailFragment : Fragment() {
             model.text = car.model
             price.text = car.price.toString()
             distance.text = car.km
-            manufDate.text = car.year
+            manufDate.text = car.yr
             engineType.text = car.engine
 
         })

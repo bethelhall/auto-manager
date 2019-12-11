@@ -17,7 +17,7 @@ data class Car(
     var model: String,
 
     @SerializedName("yr")
-    var year: String,
+    var yr: String,
 
     @SerializedName("km")
     var km: String,

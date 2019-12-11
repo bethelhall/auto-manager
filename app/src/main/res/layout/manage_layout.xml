@@ -11,7 +11,7 @@
         app:cardCornerRadius="6dp">
 
         <ProgressBar
-            android:id="@+id/loading_spinner_login"
+            android:id="@+id/manage_loading_spinner_login"
             android:layout_width="107dp"
             android:layout_height="76dp"
             android:layout_gravity="center"

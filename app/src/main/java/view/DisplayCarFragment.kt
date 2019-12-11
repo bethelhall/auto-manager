@@ -4,7 +4,10 @@ import adapter.CarRecyclerAdapter
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -25,6 +28,8 @@ import kotlinx.android.synthetic.main.manage_layout.view.*
 class DisplayCarFragment : Fragment() {
     private lateinit var carViewModel: CarViewModel
     private lateinit var recyclerView: RecyclerView
+    private lateinit var deleteButton: Button
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,6 +52,7 @@ class DisplayCarFragment : Fragment() {
         activity.hideBottomBar(false)
 
         recyclerView = view.recycler_view_manage
+        progressBar = view.manage_loading_spinner_login
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -57,18 +63,27 @@ class DisplayCarFragment : Fragment() {
 
             carViewModel.getCars()
             carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
-                recyclerView.adapter = CarRecyclerAdapter(it.body()!!, carViewModel, activity.supportFragmentManager)
+                recyclerView.adapter =
+                    CarRecyclerAdapter(it.body()!!, carViewModel, activity.supportFragmentManager)
 
 
             })
         } else {
+            progressBar.isVisible = true
+
             carViewModel.getCarsFromLocal()
 
-            carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
-                recyclerView.adapter = CarRecyclerAdapter(it.body()!!, carViewModel, activity.supportFragmentManager
-                        )
-            })
+            progressBar.isVisible = false
         }
+
+//        view.delete_button.setOnClickListener {
+//            carViewModel.getCars()
+//            carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
+//                recyclerView.adapter =
+//                    CarRecyclerAdapter(it.body()!!, carViewModel, activity.supportFragmentManager)
+//            })
+//        }
+
 
         return view
     }

@@ -17,8 +17,8 @@ interface  CarService {
     @GET("users/{id}/cars")
     fun getCarsByUserIdAsync(@Path("id") id: Long): Deferred<Response<CarWrapper>>
 
-    @POST("car")
-    fun insertCarAsync(@Body newCar: Car): Deferred<Response<Void>>
+    @POST("cars/")
+    fun insertCarAsync(@Body car: Car): Deferred<Response<Void>>
 
     @PUT("cars/{id}")
     fun updateCarAsync(@Path("id") id: Long, @Body car: Car): Deferred<Response<Car>>

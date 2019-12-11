@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +16,6 @@ import com.example.beheer.NavigationHost
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
 import data.model.Car
-import kotlinx.android.synthetic.main.fragment_car_detail.view.*
 import kotlinx.android.synthetic.main.fragment_edit_car.view.*
 
 
@@ -60,24 +58,21 @@ class EditCarFragment : Fragment() {
             engineType.setText(car.engine)
             distance.setText(car.km)
             price.setText(car.price.toString())
-            manufDate.setText(car.year)
-
+            manufDate.setText(car.yr)
 
         })
-
 
         view.submitEdit_button.setOnClickListener {
 
             val carId: Long? = arguments?.getLong("carId")
             carViewModel.getCarById(carId!!)
-
             carViewModel.getResponse.observe(viewLifecycleOwner, Observer { response ->
                 var car: Car = response.body()!!
                 car.model = carName.text.toString()
                 car.engine = engineType.text.toString()
                 car.km = distance.text.toString()
                 car.price = price.text.toString().toLong()
-                car.year = manufDate.text.toString()
+                car.yr = manufDate.text.toString()
                 carViewModel.updateCar(carId!!, car)
             })
 
@@ -96,16 +91,6 @@ class EditCarFragment : Fragment() {
         return view
 
     }
-
-    private fun readFields() = Car(
-        1,
-        price.text.toString().toLong(),
-        carName.text.toString(),
-        manufDate.text.toString(),
-        distance.text.toString(),
-        engineType.text.toString()
-
-    )
 
     companion object {
 

@@ -25,6 +25,7 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
     }
 
 
+
     private val _getResponse = MutableLiveData<Response<Car>>()
     val getResponse: LiveData<Response<Car>>
         get() = _getResponse
@@ -40,6 +41,7 @@ class CarViewModel(application: Application) : AndroidViewModel(application) {
     private val _insertResponse = MutableLiveData<Response<Void>>()
     val insertResponse: LiveData<Response<Void>>
         get() = _insertResponse
+
 
     private val _deleteResponse = MutableLiveData<Response<Void>>()
     val deleteResponse: MutableLiveData<Response<Void>>

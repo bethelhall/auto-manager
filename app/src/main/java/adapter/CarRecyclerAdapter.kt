@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Update
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
+import data.model.Car
 import data.model.CarWrapper
-import kotlinx.android.synthetic.main.activity_main.view.*
 import view.CarDetailFragment
 import view.EditCarFragment
 
@@ -21,7 +23,7 @@ class CarRecyclerAdapter(
     private var allCars: CarWrapper,
     private var carViewModel: CarViewModel,
     private var fragment: FragmentManager
-) : RecyclerView.Adapter<CarRecyclerAdapter.ManageViewHolder>() {
+) : RecyclerView.Adapter<CarRecyclerAdapter.ManageViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ManageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -39,15 +41,13 @@ class CarRecyclerAdapter(
         holder.model.text = car.model
         holder.eng_type.text = car.engine
         holder.price.text = car.price.toString()
-        holder.manuf_date.text = car.year
-
-
-
+        holder.manuf_date.text = car.yr
 
         holder.deleteButton.setOnClickListener {
 
-            carViewModel.deleteCar(carId)
-            notifyDataSetChanged()
+            var carId: Long? = carId
+            carViewModel.deleteCar(carId!!)
+
         }
         holder.editButton.setOnClickListener {
             fragment.beginTransaction()
