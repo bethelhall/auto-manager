@@ -53,7 +53,6 @@ class LoginFragment : Fragment() {
             progressBar = view.loading_spinner_login
             progressBar.isVisible = true
 
-
                 emailEditText = view.email_input
                 passwordEditText = view.password_input
 
