@@ -38,7 +38,6 @@ class CarDetailFragment : Fragment() {
 
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,13 +65,12 @@ class CarDetailFragment : Fragment() {
         carViewModel.getResponse.observe(viewLifecycleOwner, Observer { response ->
             val car: Car = response.body()!!
             model.text = car.model
-            price.text = car.price.toString()
+            price.text = """${car.price}$"""
             distance.text = car.km
             manufDate.text = car.yr
             engineType.text = car.engine
 
         })
-
 
 
         backbtn.setOnClickListener {

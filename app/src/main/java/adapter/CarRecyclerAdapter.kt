@@ -23,7 +23,7 @@ class CarRecyclerAdapter(
     private var allCars: CarWrapper,
     private var carViewModel: CarViewModel,
     private var fragment: FragmentManager
-) : RecyclerView.Adapter<CarRecyclerAdapter.ManageViewHolder>(){
+) : RecyclerView.Adapter<CarRecyclerAdapter.ManageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ManageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -45,10 +45,10 @@ class CarRecyclerAdapter(
 
         holder.deleteButton.setOnClickListener {
 
-            var carId: Long? = carId
-            carViewModel.deleteCar(carId!!)
-
+            var carID: Long? = carId
+            carViewModel.deleteCar(carID!!)
         }
+
         holder.editButton.setOnClickListener {
             fragment.beginTransaction()
                 .replace(
@@ -65,20 +65,19 @@ class CarRecyclerAdapter(
                 .replace(
                     R.id.container,
                     CarDetailFragment.newInstance(allCars.embeddedCars.allCars[position].id)
-
                 )
                 .addToBackStack(null)
                 .commit()
         }
 
-
     }
 
     class ManageViewHolder(var carView: View) : RecyclerView.ViewHolder(carView) {
-        var model: TextView = carView.findViewById(R.id.car_name_manage)
-        var price: TextView = carView.findViewById(R.id.price_manage)
-        var eng_type: TextView = carView.findViewById(R.id.engine_manage)
-        var manuf_date: TextView = carView.findViewById(R.id.manufacture_date_manage)
+        var model: TextView = carView.findViewById(R.id.model_id)
+        var price: TextView = carView.findViewById(R.id.price_id)
+        var eng_type: TextView = carView.findViewById(R.id.engine_id)
+        var km: TextView = carView.findViewById(R.id.km_id)
+        var manuf_date: TextView = carView.findViewById(R.id.date_id)
         val deleteButton: Button = carView.findViewById(R.id.delete_button)
         val editButton: Button = carView.findViewById(R.id.edit_button)
     }

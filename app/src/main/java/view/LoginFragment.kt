@@ -16,7 +16,6 @@ import com.example.beheer.NavigationHost
 
 class LoginFragment : Fragment() {
 
-
     //firebase Authentication
     private lateinit var firebaseAuth: FirebaseAuth
 
@@ -44,7 +43,6 @@ class LoginFragment : Fragment() {
 
         val activity = activity as MainActivity?
         activity?.hideBottomBar(true)
-
 
 
 

@@ -1,7 +1,6 @@
 package view
 
 import adapter.CarRecyclerAdapter
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -13,12 +12,10 @@ import androidx.lifecycle.ViewModelProviders
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.Update
 import com.example.beheer.MainActivity
 import com.example.beheer.NavigationHost
 import com.example.beheer.R
 import com.example.beheer.viewmodel.CarViewModel
-import data.model.CarWrapper
 import kotlinx.android.synthetic.main.fragment_display_car.view.*
 import kotlinx.android.synthetic.main.manage_layout.view.*
 
@@ -48,6 +45,7 @@ class DisplayCarFragment : Fragment() {
 
         activity.hideBottomBar(false)
 
+
         recyclerView = view.recycler_view_manage
 
 
@@ -57,7 +55,6 @@ class DisplayCarFragment : Fragment() {
 
 
         if (isConnected) {
-
 
             carViewModel.getCars()
             carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
@@ -75,14 +72,6 @@ class DisplayCarFragment : Fragment() {
                 )
             })
         }
-
-//        view.delete_button.setOnClickListener {
-//            carViewModel.getCars()
-//            carViewModel.getResponses.observe(viewLifecycleOwner, Observer {
-//                recyclerView.adapter =
-//                    CarRecyclerAdapter(it.body()!!, carViewModel, activity.supportFragmentManager)
-//            })
-//        }
 
 
         return view
